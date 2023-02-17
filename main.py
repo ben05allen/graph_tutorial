@@ -76,11 +76,18 @@ async def list_inbox(graph: Graph):
         # If @odata.nextLink is present
         more_available = message_page.odata_next_link is not None
         print('\nMore messages available?', more_available, '\n')
-        
+
 
 async def send_mail(graph: Graph):
-    # TODO
-    return
+    # Send mail to the signed-in user
+    # Get the user for their email address
+    user = await graph.get_user()
+    if user is not None:
+        user_email = user.mail or user.user_principal_name
+
+        await graph.send_mail('Testing Microsoft Graph', 'Hello world!', user_email or '')
+        print('Mail sent.\n')
+        
 
 async def make_graph_call(graph: Graph):
     # TODO

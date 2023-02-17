@@ -67,3 +67,27 @@ class Graph:
                 request_configuration=request_config)
         return messages
 
+
+    async def send_mail(self, subject: str, body: str, recipient: str):
+        message = Message()
+        message.subject = subject
+
+        message.body = ItemBody()
+        message.body.content_type = BodyType.Text
+        message.body.content = body
+
+        to_recipient = Recipient()
+        to_recipient.email_address = EmailAddress()
+        to_recipient.email_address.address = recipient
+        message.to_recipients = []
+        message.to_recipients.append(to_recipient)
+
+        request_body = SendMailPostRequestBody()
+        request_body.message = message
+
+        await self.user_client.me.send_mail.post(body=request_body)
+
+
+    async def make_graph_call(self):
+        # INSERT YOUR CODE HERE
+        return

@@ -24,7 +24,7 @@ class Graph:
         tenant_id = self.settings['tenantId']
         graph_scopes = self.settings['graphUserScopes'].split(' ')
 
-        self.device_code_credential = DeviceCodeCredential(client_id, tenant_id = tenant_id)
+        self.device_code_credential = DeviceCodeCredential(client_id, tenant_id=tenant_id)
         auth_provider = AzureIdentityAuthenticationProvider(
             self.device_code_credential,
             scopes=graph_scopes)
